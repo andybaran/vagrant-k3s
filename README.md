@@ -18,3 +18,5 @@ This is intended to get a 3 node k3's enviroment up and running with your locall
    1. Windows : setx VAGRANT_HOME "E:\Vagrant" /M
    2. Other : export VAGRANT_HOME=X:\PATH\TO\VAGRANT
 3. [awk regexp](https://www.gnu.org/software/gawk/manual/html_node/Regexp.html)
+4. [Vagrant and Hyper-V](https://docs.microsoft.com/en-us/virtualization/community/team-blog/2017/20170706-vagrant-and-hyper-v-tips-and-tricks)
+5. [Some discussion on Hyper-V networking limitations and work-arounds](https://github.com/hashicorp/vagrant/issues/8384)

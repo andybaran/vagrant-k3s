@@ -20,8 +20,11 @@ Vagrant.configure(2) do |config|
     master.vm.provider "hyperv" do |v|
       v.memory = "1024"
       v.vmname = "master"
+      v.smb_password = "password_replace"
+      v.smb_username = "username_replace"
+      v.enable_virtualization_extensions = true
       end
-      
+
     master.vm.provision "shell", inline: <<-SHELL
       sudo apt update
       sudo apt install etcd-server etcd-client -y
@@ -63,6 +66,9 @@ Vagrant.configure(2) do |config|
     node1.vm.provider "hyperv" do |v|
       v.memory = "1024"
       v.vmname = "node1"
+      v.smb_password = "password_replace"
+      v.smb_username = "username_replace"
+      v.enable_virtualization_extensions = true
       end
     
     node1.vm.provision "shell", inline: <<-SHELL
@@ -94,6 +100,9 @@ Vagrant.configure(2) do |config|
     node2.vm.provider "hyperv" do |v|
       v.memory = "1024"
       v.vmname = "node2"
+      v.smb_password = "password_replace"
+      v.smb_username = "username_replace"
+      v.enable_virtualization_extensions = true
       end
     
     node2.vm.provision "shell", inline: <<-SHELL
@@ -120,13 +129,16 @@ Vagrant.configure(2) do |config|
     #VirtualBox Config
     node3.vm.provider "virtualbox" do |v|
       v.memory = "1024"
-      v.name = "node2"
+      v.name = "node3"
       end
 
     #Hyper-V Config
     node3.vm.provider "hyperv" do |v|
       v.memory = "1024"
-      v.vmname = "node2"
+      v.vmname = "node3"
+      v.smb_password = "password_replace"
+      v.smb_username = "username_replace"
+      v.enable_virtualization_extensions = true
       end
     
     node3.vm.provision "shell", inline: <<-SHELL

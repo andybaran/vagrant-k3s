@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
       v.memory = "1024"
       v.vmname = "master"
       end
-man iu
+      
     master.vm.provision "shell", inline: <<-SHELL
       sudo apt update
       sudo apt install etcd-server etcd-client -y

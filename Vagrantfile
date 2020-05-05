@@ -1,4 +1,4 @@
-default_box = 'ubuntu/bionic64'
+default_box = 'bento/ubuntu-16.04'
 
 Vagrant.configure(2) do |config|
   config.vm.define 'master' do |master|

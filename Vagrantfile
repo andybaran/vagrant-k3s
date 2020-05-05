@@ -4,8 +4,8 @@ Vagrant.configure(2) do |config|
   config.vm.define 'master' do |master|
     master.vm.box = default_box
     master.vm.hostname = "master"
-    master.vm.synced_folder ".", "/vagrant", type:"virtualbox"
-    master.vm.network 'private_network', ip: "192.168.0.200",  virtualbox__intnet: true
+    master.vm.synced_folder ".", "/vagrant"
+    master.vm.network 'private_network', ip: "192.168.0.200"
     master.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
     master.vm.network "forwarded_port", guest: 22, host: 2000 # SSH TO MASTER/NODE
     master.vm.network "forwarded_port", guest: 6443, host: 6443 # ACCESS K8S API
@@ -15,6 +15,11 @@ Vagrant.configure(2) do |config|
     master.vm.provider "virtualbox" do |v|
       v.memory = "1024"
       v.name = "master"
+      end
+
+    master.vm.provider "hyperv" do |v|
+      v.memory = "1024"
+      v.vmname = "master"
       end
 
     master.vm.provision "shell", inline: <<-SHELL
@@ -40,13 +45,21 @@ Vagrant.configure(2) do |config|
   config.vm.define 'node1' do |node1|
     node1.vm.box = default_box
     node1.vm.hostname = "node1"
-    node1.vm.synced_folder ".", "/vagrant", type:"virtualbox"
-    node1.vm.network 'private_network', ip: "192.168.0.201",  virtualbox__intnet: true
+    node1.vm.synced_folder ".", "/vagrant"
+    node1.vm.network 'private_network', ip: "192.168.0.201"
     node1.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
     node1.vm.network "forwarded_port", guest: 22, host: 2001
+    
+    #VirtualBox Config
     node1.vm.provider "virtualbox" do |v|
       v.memory = "1024"
       v.name = "node1"
+      end
+
+    #Hyper-V Config
+    node1.vm.provider "hyperv" do |v|
+      v.memory = "1024"
+      v.vmname = "node1"
       end
     
     node1.vm.provision "shell", inline: <<-SHELL
@@ -60,13 +73,21 @@ Vagrant.configure(2) do |config|
   config.vm.define 'node2' do |node2|
     node2.vm.box = default_box
     node2.vm.hostname = "node2"
-    node2.vm.synced_folder ".", "/vagrant", type:"virtualbox"
-    node2.vm.network 'private_network', ip: "192.168.0.202",  virtualbox__intnet: true
+    node2.vm.synced_folder ".", "/vagrant"
+    node2.vm.network 'private_network', ip: "192.168.0.202"
     node2.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
     node2.vm.network "forwarded_port", guest: 22, host: 2002
+    
+    #VirtualBox Config
     node2.vm.provider "virtualbox" do |v|
       v.memory = "1024"
       v.name = "node2"
+      end
+
+    #Hyper-V Config
+    node2.vm.provider "hyperv" do |v|
+      v.memory = "1024"
+      v.vmname = "node2"
       end
     
     node2.vm.provision "shell", inline: <<-SHELL
@@ -81,13 +102,21 @@ Vagrant.configure(2) do |config|
   config.vm.define 'node3' do |node3|
     node3.vm.box = default_box
     node3.vm.hostname = "node3"
-    node3.vm.synced_folder ".", "/vagrant", type:"virtualbox"
-    node3.vm.network 'private_network', ip: "192.168.0.203",  virtualbox__intnet: true
+    node3.vm.synced_folder ".", "/vagrant"
+    node3.vm.network 'private_network', ip: "192.168.0.203"
     node3.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
     node3.vm.network "forwarded_port", guest: 22, host: 2003
+
+    #VirtualBox Config
     node3.vm.provider "virtualbox" do |v|
       v.memory = "1024"
-      v.name = "node3"
+      v.name = "node2"
+      end
+
+    #Hyper-V Config
+    node3.vm.provider "hyperv" do |v|
+      v.memory = "1024"
+      v.vmname = "node2"
       end
     
     node3.vm.provision "shell", inline: <<-SHELL
